@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    name: helloworld
+    bus:
+      enabled: true
+      trace:
+        enabled: true
+      refresh:
+        enabled: true
+    azure:
+      servicebus:
+        auto-create-resources: true
+        connection-string: <Connection-String>
+        topic:
+          bindings:
+            servicebus-topic:
+              destination: test
+              group: springcloudbus-subscription
+    stream:
+      bindings:
+        springCloudBusInput:
+          destination: springcloudbus
+          group: springcloudbus-subscription
+        springCloudBusOutput:
+          destination: springcloudbus
+      servicebus:
+        topic:
+          bindings:
+            springCloudBusInput:
+              consumer:
+                checkpoint-mode: MANUAL
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
