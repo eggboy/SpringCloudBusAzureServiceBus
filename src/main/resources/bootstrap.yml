@@ -9,13 +9,7 @@ spring:
         enabled: true
     azure:
       servicebus:
-        auto-create-resources: true
         connection-string: <Connection-String>
-        topic:
-          bindings:
-            servicebus-topic:
-              destination: test
-              group: springcloudbus-subscription
     stream:
       bindings:
         springCloudBusInput:
