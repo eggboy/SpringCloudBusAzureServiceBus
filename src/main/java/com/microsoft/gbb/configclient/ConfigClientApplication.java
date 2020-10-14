@@ -40,15 +40,3 @@ class HelloRestController {
 		return message;
 	}
 }
-
-@Configuration
-class ServiceBusAutoConfiguration {
-	@Bean
-	@ConditionalOnMissingBean
-	@ConditionalOnProperty(prefix = "azure.servicebus",
-			value = {"topic-name", "subscription-name", "subscription-receive-mode"})
-	public SubscriptionClient subscriptionClient() throws ServiceBusException, InterruptedException {
-		return new SubscriptionClient(new ConnectionStringBuilder("Endpoint=sb://scbus-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=V5YpxIGBluHDok1fUZiXtTGU5T0xzmYJKqI34OlN6eI=",
-				"springcloudbus" + "/subscriptions/" + "springcloudbus-subscription"), ReceiveMode.PEEKLOCK);
-	}
-}
