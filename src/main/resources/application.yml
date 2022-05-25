@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: cloud-bus-app
+  cloud:
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+      trace:
+        enabled: true
+    azure:
+      servicebus:
+        connection-string: 
+    stream:
+      bindings:
+        springCloudBusInput:
+          destination: springcloudbus
+          group: springcloudbus-subscription
+        springCloudBusOutput:
+          destination: springcloudbus
+      servicebus:
+        bindings:
+          springCloudBusInput:
+            consumer:
+              auto-complete: false
+          springCloudBusOutput:
+            producer:
+              entity-type: topic
+#  config:
+#    import: "configserver:"
+##management:
+##  endpoints:
+##    web:
+##      exposure:
+##        include: "*"
